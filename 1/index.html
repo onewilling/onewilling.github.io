@@ -54,31 +54,87 @@
     <h3>Alignment by RGB</h3>
     <p>To align the image channels by RGB similarity, I exhaustively search over a window of possible displacements, score each displacement using an image matching metric, and select the displacement with the best score.</p>
     <p><strong>Why Euclidean Distance?</strong> I implemented both Euclidean Distance and Normalized Cross-Correlation. The results indicate that Euclidean Distance performs better in this context.</p>
-    
+    <div class = "image-container">
+      <img src = "media/data/monastery.jpg" alt="Original">
+      <img src = "media/img_aligned/" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/data/tobolsk.jpg" alt="Original">
+      <img src = "media/img_aligned/tobolsk.jpg" alt="Colored">
+    </div>
+
+
     <h3>Pyramid Speedup</h3>
     <p>An image pyramid represents the image at multiple scales, typically scaled by a factor of 2. Processing is performed sequentially, starting from the coarsest scale and moving to finer scales, updating the estimate at each level. I used a recursive call to my original single-scale implementation. However, larger levels result in increased blur and information loss, so I opted for a smaller pyramid level.</p>
+    <div class = "image-container">
+      <img src = "media/data/three_generations.jpg" alt="Original">
+      <img src = "media/img_aligned/three_generations.jpg" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/data/train.jpg" alt="Original">
+      <img src = "media/img_aligned/train.jpg" alt="Colored">
+    </div>
+
     
     <h2>Extras</h2>
     
     <h3>Automatic Cropping by Dynamic Margin</h3>
     <p><strong>Why Not Variance?</strong> Initially, I calculated the variance of each row and column to crop borders of white, black, or other colors. However, this method did not yield satisfactory results, as a single threshold was not applicable to all images.</p>
     <p><strong>Why Dynamic Margin?</strong> Given that the images are of similar size (taken with the same photographic equipment), I chose to use two margin factors and crop the borders dynamically.</p>
-    
+    <div class = "image-container">
+      <img src = "media/img_aligned/harvesters.jpg" alt="Original">
+      <img src = "media/img_cropped/harvesters.jpg" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/img_aligned/lady.jpg" alt="Original">
+      <img src = "media/img_cropped/lady.jpg" alt="Colored">
+    </div>
+
     <h3>Automatic Contrast Adjustment</h3>
     <p>The darkest pixel is treated as zero, and the brightest pixel as one. I then linearly map the image, resulting in visually pleasing results.</p>
-    
+    <div class = "image-container">
+      <img src = "media/img_cropped/onion_church.jpg" alt="Original">
+      <img src = "media/img_contrasted/onion_church.jpg" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/img_cropped/icon.jpg" alt="Original">
+      <img src = "media/img_contrasted/icon.jpg" alt="Colored">
+    </div>
+
+
     <h3>Automatic White Balance</h3>
     <p>White balance involves adjusting the average color in each channel to grey, and the average color in the whole image to neutral grey. However, since the images are light-balanced, adjusting the average color to grey resulted in a greyer overall image.</p>
     <p><strong>I Did Not Apply White Balance</strong></p>
+    <div class = "image-container">
+      <img src = "media/img_contrasted/church.jpg" alt="Original">
+      <img src = "media/img_whitebalanced/church.jpg" alt="Colored">
+    </div>
     
     <h3>Green Base</h3>
     <p><strong>Why Blue Base?</strong> Given the blurriness of the images, I explored other methods to enhance image quality. I came across the awarded homework by <strong>Saurav Mittal</strong>, which suggested "Base Channel Selection." Based on this, I initially chose green as the base channel.</p>
     <p><strong>Why Green?</strong> Saurav Mittal explained that "green provided consistently good results for all images". However, I sought a more comprehensive explanation and found a biochemical rationale: "When fully light-adapted, the human eye features a wavelength response from around 400 to 700 nanometers, with a peak sensitivity at 555 nanometers (in the green region of the visible light spectrum)...... Light scattering and absorption by elements in the crystalline lens contributes to a further loss of sensitivity in the far blue."</p>
     <p>This explains why green is chosen as the base channel.</p>
+    <div class = "image-container">
+      <img src = "media/img_contrasted/emir.jpg" alt="Original">
+      <img src = "media/img_green/emir.jpg" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/img_contrasted/self_portrait.jpg" alt="Original">
+      <img src = "media/img_green/self_portrait.jpg" alt="Colored">
+    </div>
+    <div class = "image-container">
+      <img src = "media/img_contrasted/melons.jpg" alt="Original">
+      <img src = "media/img_green/melons.jpg" alt="Colored">
+    </div>
     
     <h3>Alignment by Gradient</h3>
     <p><strong>Why RGB-Based Alignment?</strong> Some dazzling strips remain, which suggests that the alignment method may be at fault. RGB-based alignment is sensitive to both color and light. Given that the project website offers gradient-based and edge-based methods, I chose the gradient-based method due to familiarity with the relevant mathematics.</p>
-    
+    <div class = "image-container">
+      <img src = "media/img_green/sculpture.jpg" alt="Original">
+      <img src = "media/img_gradient/sculpture.jpg" alt="Colored">
+    </div>
+
+
     <h2>Appendix</h2>
     <table border="1">
       <tr>
