@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CS180 Portfolio Report</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    p {
-      margin-bottom: 15px;
-    }
-    .section {
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h1>CS180 Portfolio Report</h1>
-  
-  <div class="section">
+  <head>
+    <title>My Portfolio</title>
+    <style>
+      body{
+        font-family: Arial, sans-serif;
+        margin: 20px;}
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to My CS180 Portfolio!</h1>
+    <a href="./1/index.html">Project 1</a>
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prokudin-Gorskii Colorization Project</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1, h2, h3 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      a {
+        color: #007BFF;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Colorizing the Prokudin-Gorskii Photo Collection</h1>
+    
+    <h2>Background</h2>
+    <p>Sergei Mikhailovich Prokudin-Gorskii (1863-1944) was a pioneering color photographer. In 1907, he obtained special permission from the Tsar to travel across the Russian Empire and capture color photographs using a technique of recording three exposures on glass plates with red, green, and blue filters. He documented a wide array of subjects, including people, buildings, landscapes, railroads, and bridges, and even took the only color portrait of Leo Tolstoy.</p>
+    <p>Prokudin-Gorskii envisioned using his photographs in special projectors for multimedia classrooms to educate children about their country. Unfortunately, his plans were never realized as he left Russia in 1918 following the revolution and never returned.</p>
+    <p>In 1948, the Library of Congress purchased Prokudin-Gorskii’s RGB glass plate negatives, which capture the last years of the Russian Empire. Recently, the Library digitized these images and made them available online.</p>
+    
     <h2>Goal</h2>
     <p>The goal of this project is to take digitized Prokudin-Gorskii glass plate images and, using image processing techniques, automatically produce a color image with minimal visual artifacts.</p>
-  </div>
-  
-  <div class="section">
+    
     <h2>Implementation</h2>
     
     <h3>Alignment by RGB</h3>
-    <p>To align the image channels by RGB similarity, I exhaustively search over a window of possible displacements (specified in the appendix), score each displacement using an image matching metric, and select the displacement with the best score.</p>
+    <p>To align the image channels by RGB similarity, I exhaustively search over a window of possible displacements, score each displacement using an image matching metric, and select the displacement with the best score.</p>
     <p><strong>Why Euclidean Distance?</strong> I implemented both Euclidean Distance and Normalized Cross-Correlation. The results indicate that Euclidean Distance performs better in this context.</p>
     
     <h3>Pyramid Speedup</h3>
     <p>An image pyramid represents the image at multiple scales, typically scaled by a factor of 2. Processing is performed sequentially, starting from the coarsest scale and moving to finer scales, updating the estimate at each level. I used a recursive call to my original single-scale implementation. However, larger levels result in increased blur and information loss, so I opted for a smaller pyramid level.</p>
-  </div>
-  
-  <div class="section">
+    
     <h2>Extras</h2>
     
     <h3>Automatic Cropping by Dynamic Margin</h3>
@@ -52,13 +71,45 @@
     <p><strong>I Did Not Apply White Balance</strong></p>
     
     <h3>Green Base</h3>
-    <p><strong>Why Blue Base?</strong> Given the blurriness of the images, I explored other methods to enhance image quality. I came across the awarded homework by Saurav Mittal, which suggested "Base Channel Selection." Based on this, I initially chose green as the base channel.</p>
-    <p><strong>Why Green?</strong> Saurav Mittal explained that green provided consistently good results for all images. However, I sought a more comprehensive explanation and found a biochemical rationale: the human eye is most sensitive to green light (555 nanometers) and less sensitive to blue light due to scattering and absorption in the crystalline lens.</p>
-    <p>(Contributing Authors: Kenneth R. Spring – Scientific Consultant, Lusby, Maryland, 20657. Thomas J. Fellers and Michael W. Davidson – National High Magnetic Field Laboratory, 1800 East Paul Dirac Dr., The Florida State University, Tallahassee, Florida, 32310.)</p>
-    <p><a href="https://www.olympus-lifescience.com/en/microscope-resource/primer/lightandcolor/humanvisionintro/">The Physics of Light and Color - Human Vision and Color Perception | Olympus LS</a></p>
+    <p><strong>Why Blue Base?</strong> Given the blurriness of the images, I explored other methods to enhance image quality. I came across the awarded homework by <strong>Saurav Mittal</strong>, which suggested "Base Channel Selection." Based on this, I initially chose green as the base channel.</p>
+    <p><strong>Why Green?</strong> Saurav Mittal explained that "green provided consistently good results for all images". However, I sought a more comprehensive explanation and found a biochemical rationale: "When fully light-adapted, the human eye features a wavelength response from around 400 to 700 nanometers, with a peak sensitivity at 555 nanometers (in the green region of the visible light spectrum)...... Light scattering and absorption by elements in the crystalline lens contributes to a further loss of sensitivity in the far blue."</p>
+    <p>This explains why green is chosen as the base channel.</p>
     
     <h3>Alignment by Gradient</h3>
     <p><strong>Why RGB-Based Alignment?</strong> Some dazzling strips remain, which suggests that the alignment method may be at fault. RGB-based alignment is sensitive to both color and light. Given that the project website offers gradient-based and edge-based methods, I chose the gradient-based method due to familiarity with the relevant mathematics.</p>
-  </div>
-</body>
+    
+    <h2>Appendix</h2>
+    <table border="1">
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Displacement</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>Level</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Scale</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Margin Height</td>
+        <td>0.12</td>
+      </tr>
+      <tr>
+        <td>Margin Width</td>
+        <td>0.07</td>
+      </tr>
+    </table>
+    
+    <h2>References</h2>
+    <ul>
+      <li><strong>Saurav Mittal</strong>. <em>Images of the Russian Empire</em>. Retrieved from <a href="https://sauravmittal.github.io/computational-photography/colorizing-photos/">Saurav Mittal's website</a>.</li>
+      <li><strong>Kenneth R. Spring</strong>, <strong>Thomas J. Fellers</strong>, and <strong>Michael W. Davidson</strong>. <em>The Physics of Light and Color - Human Vision and Color Perception</em>. Retrieved from <a href="https://www.olympus-lifescience.com/en/microscope-resource/primer/lightandcolor/humanvisionintro/">Olympus Life Science</a>.</li>
+    </ul>
+  </body>
 </html>
