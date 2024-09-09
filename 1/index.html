@@ -20,6 +20,15 @@
       a {
         color: #007BFF;
       }
+      .image-container{
+        display: flex;
+        gap: 10px;
+      }
+      .image-container img{
+        max-width: 100%;
+        height:auto;
+        width:45%;
+      }
     </style>
   </head>
   <body>
@@ -33,6 +42,11 @@
     <h2>Goal</h2>
     <p>The goal of this project is to take digitized Prokudin-Gorskii glass plate images and, using image processing techniques, automatically produce a color image with minimal visual artifacts.</p>
     
+    <div class = "image-container">
+      <img src = "media/data/cathedral.jpg" alt="Original">
+      <img src = "media/img_gradient/cathedral.jpg" alt="Colored">
+    </div>
+
     <h2>Implementation</h2>
     
     <h3>Alignment by RGB</h3>
